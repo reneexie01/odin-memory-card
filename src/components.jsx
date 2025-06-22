@@ -1,27 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Cards } from "./cards";
 export { Api }
 
 function Api() {
-    const [image, setImage] = useState(null)
     const [count, setCount] = useState(0)
 
-    const randomNumber = Math.floor(Math.random() * 100) + 1;
-
-    useEffect(() => {
-        fetch(`https://pokeapi.co/api/v2/pokemon/${randomNumber}/`)
-        .then(function(response) {
-            console.log(response)
-            console.log('Random number', randomNumber)
-            return response.json();
-        })
-        .then(function(response) {
-            console.log(response)
-            const sprite = response.sprites.other.dream_world.front_default;
-            setImage(sprite);
-        })
-    }, [count])
-
+    // Updates the count useState which is a dependency for the API useEffect
     const registerClick = () => {
         let currentCount = count;
         currentCount++
@@ -31,8 +15,12 @@ function Api() {
     return (
         <>
         <Cards
-            image={image}
             registerClick={registerClick}
+            count={count}
+        />
+         <Cards
+            registerClick={registerClick}
+            count={count}
         />
         </>
     )
