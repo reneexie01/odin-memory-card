@@ -4,7 +4,7 @@ export { Api }
 
 function Api() {
     const [count, setCount] = useState(0)
-    const [pokemonFound, setPokemonFound] = useState('')
+    const [pokemonFound, setPokemonFound] = useState([])
 
     // Updates the count useState which is a dependency for the API useEffect
     const registerClick = () => {
@@ -15,7 +15,10 @@ function Api() {
 
     //TODO: onClick must register the randomNumber that was generated and add it to an array
     const handleChildData = (data) => {
-        setPokemonFound(data)
+        const newPokemon = data;
+        const newPokemonArray = [...pokemonFound, newPokemon]
+        console.log(newPokemonArray)
+        setPokemonFound(newPokemonArray);
     }
 
     useEffect(() => {
