@@ -6,7 +6,7 @@ function Cards({registerClick, count, onDataSend}) {
     const [pokemonNumber, setPokemonNumber] = useState('')
 
     useEffect(() => {
-        const randomNumber = Math.floor(Math.random() * 50) + 1;
+        const randomNumber = Math.floor(Math.random() * 10) + 1;
         setPokemonNumber(randomNumber);
     }, [count])
     
