@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 export { Cards }
 
-function Cards({registerClick, count, onDataSend}) {
+function Cards({ registerClick, count, onDataSend, gameStatus }) {
     const [image, setImage] = useState(null)
     const [pokemonNumber, setPokemonNumber] = useState('')
 
@@ -14,9 +14,14 @@ function Cards({registerClick, count, onDataSend}) {
         onDataSend(pokemonNumber)
     }
 
+// Once gameStatus is false click handlers are removed
     const handleClick = () => {
+        if (gameStatus) {
         sendData();
         registerClick();
+        } else {
+            return;
+        }
     }
 
     useEffect(() => {

@@ -1,17 +1,23 @@
 import { useState, useEffect } from "react";
 import { Cards } from "./cards";
+import { Scoreboard } from "./scoreboard";
 export { Api }
 
 function Api() {
     const [count, setCount] = useState(0);
     const [pokemonFound, setPokemonFound] = useState([]);
     const [lastPokemonClicked, setLastPokemonClicked] = useState('');
+    const [gameStatus, setGameStatus] = useState(true)
+    const [scoreHistory, setScoreHistory] = useState([1,1,2]);
 
-    // Updates the count useState which is a dependency for the API useEffect
+    const updateScoreHistory = () => {
+        const score = pokemonFound.length;
+        setScoreHistory((prev) => [...prev, score]);
+    } // TODO: Fix this infinite loop
+    
+    // Updates the count useState which is a dependency for the API useEffect using the functional form
     const registerClick = () => {
-        let currentCount = count;
-        currentCount++
-        setCount(currentCount)
+        setCount(prev => prev + 1)
     }
 
     // Register the randomNumber that was clicked and add it to an array (but check if the number exists in the pokemonFound array first)
@@ -19,13 +25,16 @@ function Api() {
         const existingPokemonInDatabase = pokemonFound.includes(data);
 
         if (existingPokemonInDatabase) {
-            console.log('game over')
+            setGameStatus(false)
+            updateScoreHistory()
             return;
         } else {
             setLastPokemonClicked(data)
-            const newPokemonArray = [...pokemonFound, data]
-            console.log(newPokemonArray)
-            setPokemonFound(newPokemonArray);
+            setPokemonFound(prev => {
+                 const newArray = [...prev, data];
+                 console.log(newArray);
+                 return newArray;
+            });
         }
     }
 
@@ -33,32 +42,42 @@ function Api() {
     useEffect(() => {
         console.log(
             'pokemonFound', pokemonFound,
-            'lastPokemonClicked', lastPokemonClicked
+            'lastPokemonClicked', lastPokemonClicked,
+            'scoreHistory', scoreHistory,
+            'gameStatus', gameStatus
         )
-    }, [pokemonFound, lastPokemonClicked])
-
+    }, [pokemonFound, lastPokemonClicked, scoreHistory, gameStatus])
 
     return (
         <>
+        <Scoreboard 
+            pokemonFound={pokemonFound}
+            gameStatus={gameStatus}
+            scoreHistory={scoreHistory}
+        />
         <Cards
             registerClick={registerClick}
             count={count}
             onDataSend={handleChildData}
+            gameStatus={gameStatus}
         />
          <Cards
             registerClick={registerClick}
             count={count}
             onDataSend={handleChildData}
+            gameStatus={gameStatus}
         />
          <Cards
             registerClick={registerClick}
             count={count}
             onDataSend={handleChildData}
+            gameStatus={gameStatus}
         />
          <Cards
             registerClick={registerClick}
             count={count}
             onDataSend={handleChildData}
+            gameStatus={gameStatus}
         />
         </>
     )
