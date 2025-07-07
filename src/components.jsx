@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Cards } from "./cards";
 import { Scoreboard } from "./scoreboard";
+import { StartNewGame } from "../reset";
 export { Api }
 
 function Api() {
@@ -10,18 +11,27 @@ function Api() {
     const [gameStatus, setGameStatus] = useState(true)
     const [scoreHistory, setScoreHistory] = useState([1,1,2]);
 
+    // Updates the score history so we can retrieve the best score in the scoreboard.jsx file
     const updateScoreHistory = () => {
         const score = pokemonFound.length;
         setScoreHistory((prev) => [...prev, score]);
-    } // TODO: Fix this infinite loop
+    }
     
     // Updates the count useState which is a dependency for the API useEffect using the functional form
     const registerClick = () => {
         setCount(prev => prev + 1)
     }
 
+    // Resets the game when startGame is clicked (TODO: separate this into a distinct function)
+    const childDataGameStatus = (data) => {
+        setGameStatus(data);
+        setCount(0);
+        setPokemonFound([]);
+        setLastPokemonClicked('');
+    }
+
     // Register the randomNumber that was clicked and add it to an array (but check if the number exists in the pokemonFound array first)
-    const handleChildData = (data) => {
+    const childDataPokemonNumber = (data) => {
         const existingPokemonInDatabase = pokemonFound.includes(data);
 
         if (existingPokemonInDatabase) {
@@ -50,6 +60,10 @@ function Api() {
 
     return (
         <>
+        <StartNewGame 
+            gameStatus={gameStatus}
+            childDataGameStatus={childDataGameStatus}
+        />
         <Scoreboard 
             pokemonFound={pokemonFound}
             gameStatus={gameStatus}
@@ -58,25 +72,25 @@ function Api() {
         <Cards
             registerClick={registerClick}
             count={count}
-            onDataSend={handleChildData}
+            childDataPokemoneNumber={childDataPokemonNumber}
             gameStatus={gameStatus}
         />
          <Cards
             registerClick={registerClick}
             count={count}
-            onDataSend={handleChildData}
+            childDataPokemoneNumber={childDataPokemonNumber}
             gameStatus={gameStatus}
         />
          <Cards
             registerClick={registerClick}
             count={count}
-            onDataSend={handleChildData}
+            childDataPokemoneNumber={childDataPokemonNumber}
             gameStatus={gameStatus}
         />
          <Cards
             registerClick={registerClick}
             count={count}
-            onDataSend={handleChildData}
+            childDataPokemoneNumber={childDataPokemonNumber}
             gameStatus={gameStatus}
         />
         </>
