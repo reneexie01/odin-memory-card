@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Cards } from "./cards";
 import { Scoreboard } from "./scoreboard";
 import { StartNewGame } from "../reset";
+import { RegenerateCards } from "../regenerate-cards";
 export { Api }
 
 function Api() {
@@ -9,7 +10,7 @@ function Api() {
     const [pokemonFound, setPokemonFound] = useState([]);
     const [lastPokemonClicked, setLastPokemonClicked] = useState('');
     const [gameStatus, setGameStatus] = useState(true)
-    const [scoreHistory, setScoreHistory] = useState([1,1,2]);
+    const [scoreHistory, setScoreHistory] = useState([0]);
 
     // Updates the score history so we can retrieve the best score in the scoreboard.jsx file
     const updateScoreHistory = () => {
@@ -69,30 +70,83 @@ function Api() {
             gameStatus={gameStatus}
             scoreHistory={scoreHistory}
         />
-        <Cards
-            registerClick={registerClick}
-            count={count}
-            childDataPokemoneNumber={childDataPokemonNumber}
-            gameStatus={gameStatus}
+        <RegenerateCards 
+           registerClick={registerClick}
         />
-         <Cards
-            registerClick={registerClick}
-            count={count}
-            childDataPokemoneNumber={childDataPokemonNumber}
-            gameStatus={gameStatus}
-        />
-         <Cards
-            registerClick={registerClick}
-            count={count}
-            childDataPokemoneNumber={childDataPokemonNumber}
-            gameStatus={gameStatus}
-        />
-         <Cards
-            registerClick={registerClick}
-            count={count}
-            childDataPokemoneNumber={childDataPokemonNumber}
-            gameStatus={gameStatus}
-        />
+        <div className="card-container">
+            <Cards
+                registerClick={registerClick}
+                count={count}
+                childDataPokemonNumber={childDataPokemonNumber}
+                gameStatus={gameStatus}
+            />
+            <Cards
+                registerClick={registerClick}
+                count={count}
+                childDataPokemonNumber={childDataPokemonNumber}
+                gameStatus={gameStatus}
+            />
+            <Cards
+                registerClick={registerClick}
+                count={count}
+                childDataPokemonNumber={childDataPokemonNumber}
+                gameStatus={gameStatus}
+            />
+            <Cards
+                registerClick={registerClick}
+                count={count}
+                childDataPokemonNumber={childDataPokemonNumber}
+                gameStatus={gameStatus}
+            />
+            <Cards
+                registerClick={registerClick}
+                count={count}
+                childDataPokemonNumber={childDataPokemonNumber}
+                gameStatus={gameStatus}
+            />
+            <Cards
+                registerClick={registerClick}
+                count={count}
+                childDataPokemonNumber={childDataPokemonNumber}
+                gameStatus={gameStatus}
+            />
+            <Cards
+                registerClick={registerClick}
+                count={count}
+                childDataPokemonNumber={childDataPokemonNumber}
+                gameStatus={gameStatus}
+            />
+            <Cards
+                registerClick={registerClick}
+                count={count}
+                childDataPokemonNumber={childDataPokemonNumber}
+                gameStatus={gameStatus}
+            />
+            <Cards
+                registerClick={registerClick}
+                count={count}
+                childDataPokemonNumber={childDataPokemonNumber}
+                gameStatus={gameStatus}
+            />
+            <Cards
+                registerClick={registerClick}
+                count={count}
+                childDataPokemonNumber={childDataPokemonNumber}
+                gameStatus={gameStatus}
+            />
+            <Cards
+                registerClick={registerClick}
+                count={count}
+                childDataPokemonNumber={childDataPokemonNumber}
+                gameStatus={gameStatus}
+            />
+            <Cards
+                registerClick={registerClick}
+                count={count}
+                childDataPokemonNumber={childDataPokemonNumber}
+                gameStatus={gameStatus}
+            />
+        </div>
         </>
     )
 }

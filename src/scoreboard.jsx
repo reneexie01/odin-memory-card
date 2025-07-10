@@ -7,6 +7,7 @@ function Scoreboard({ pokemonFound, scoreHistory }) {
 
     return (
         <>
+        <p>Find all 100 unique pokemon!</p>
         <p>Score: {score}</p>
         <p>Best score: {bestScore}</p>
         </>

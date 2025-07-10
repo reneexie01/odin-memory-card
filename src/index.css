@@ -8,13 +8,24 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.card-container {
+  columns: 3;
 }
 
 .card {
   border: 1px solid white;
   border-radius: 10px;
+  margin-bottom: 10px;
 }
 
 .hidden {
   display: none;
+}
+
+.shuffle-button {
+  margin-bottom: 10px;
 }
